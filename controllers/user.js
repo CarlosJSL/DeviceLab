@@ -16,8 +16,8 @@ class UsersController {
 
   create(data) {
     return this.Users.create(data)
-    .then(result => defaultResponse(result, HttpStatus.CREATED))
-    .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY));
+      .then(result => defaultResponse(result, HttpStatus.CREATED))
+      .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
   }
 }
 
