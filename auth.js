@@ -6,7 +6,7 @@ export default app => {
   const opts = {};
   opts.secretOrKey = app.config.jwtSecret;
 
-  opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
+  opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 
   const strategy = new Strategy(opts, (payload, done) => {
     Users.findById(payload.id)

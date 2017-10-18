@@ -12,8 +12,8 @@ export default app => {
       console.log(Users);
       Users.findOne({ where: { email } })
       .then(user => {
-        console.log(user.password);
-        if (Users.isPassword(user.password, password)) {
+
+        if (user._modelOptions.classMethods.isPassword(user.password, password)) {
           const payload = { id: user.id };
           res.json({
             token: jwt.encode(payload, config.jwtSecret),

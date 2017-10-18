@@ -42,19 +42,17 @@ export default (sequelize, DataType) => {
     },
     {
       hooks: {
-        afterCreate: (user) => {
-          user.lastAccess = new Date()
-        },
         beforeCreate: user => {
           const salt = bcrypt.genSaltSync();
           user.set('password', bcrypt.hashSync(user.password, salt));
         },
+        afterCreate: (user) => {
+          user.lastAccess = new Date()
+        },
       },
       classMethods: {
-        isPassword: (encodedPassword, password) => bcrypt.compareSync(password, encodedPassword),
+        isPassword: (encodedPassword, password) => bcrypt.compareSync(password, encodedPassword)
       },
-    },
-    
-  )
+    })
   return Users
 }
