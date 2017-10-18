@@ -10,4 +10,9 @@ export default (app) => {
           res.json(response.data)
         })
     })
+  app.route('/user')
+    .all(app.auth.authenticate())
+    .get((req, res) => {
+          res.send("ok")
+    })
 }
