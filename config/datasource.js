@@ -1,39 +1,39 @@
-import Sequelize from 'sequelize';
-import fs from 'fs';
-import path from 'path';
+import Sequelize from 'sequelize'
+import fs from 'fs'
+import path from 'path'
 
-let database = null;
+let database = null
 
 const loadModels = (sequelize) => {
-  const dir = path.join(__dirname, '../models');
-  const models = [];
-  fs.readdirSync(dir).forEach(file => {
-    const modelDir = path.join(dir, file);
-    const model = sequelize.import(modelDir);
-    models[model.name] = model;
-  });
-  return models;
-};
+  const dir = path.join(__dirname, '../models')
+  const models = []
+  fs.readdirSync(dir).forEach((file) => {
+    const modelDir = path.join(dir, file)
+    const model = sequelize.import(modelDir)
+    models[model.name] = model
+  })
+  return models
+}
 
 export default function (app) {
   if (!database) {
-    const config = app.config;
+    const config = app.config
     const sequelize = new Sequelize(
-        config.database,
-        config.username,
-        config.password,
-        config.params
-        );
+      config.database,
+      config.username,
+      config.password,
+      config.params,
+    )
 
     database = {
       sequelize,
       Sequelize,
       models: {},
-    };
+    }
 
-    //database.models = loadModels(sequelize);
+    database.models = loadModels(sequelize)
 
-    sequelize.sync().done(() => database);
+    sequelize.sync().done(() => database)
   }
-  return database;
+  return database
 }
