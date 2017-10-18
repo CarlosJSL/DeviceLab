@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser'
 import morgan from 'morgan'
 import express from 'express'
+import usersRouter from './routes/users'
 import datasource from './config/datasource'
 import config from './config/config'
 
@@ -15,5 +16,6 @@ app.set('port', 3000)
 app.use(bodyParser.json())
 app.use(morgan('tiny'))
 
+usersRouter(app)
 
 export default app

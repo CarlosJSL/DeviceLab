@@ -1,13 +1,13 @@
-import UsersController from '../controllers/users';
+import UsersController from '../controllers/user'
 
 export default (app) => {
-  const usersController = new UsersController(app.datasource.models.Users);
+  const usersController = new UsersController(app.datasource.models.Users)
   app.route('/signup')
-  .post((req, res) => {
-    usersController.create(req.body)
-    .then(response => {
-      res.status(response.statusCode);
-      res.json(response.data);
-    });
-  });
-};
+    .post((req, res) => {
+      usersController.create(req.body)
+        .then((response) => {
+          res.status(response.statusCode)
+          res.json(response.data)
+        })
+    })
+}
