@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   formularioCadastro : FormGroup;
   appService: AppService;
 
-  constructor(private formBuilder: FormBuilder, _appService: AppService) {
+  constructor(private formBuilder: FormBuilder,  _appService: AppService) {
     this.appService = _appService;
   }
 
@@ -24,7 +24,10 @@ export class AppComponent implements OnInit {
   }
 
   onSubmitCadastro(){
-    console.log(this.formularioCadastro)
+
+    // this.appService.signUp(...this.formularioCadastro.value)
+    // .subscribe(result => { console.log(result); this.signup=false},
+    //              err=> err.message)
   }
 
   ngOnInit() {
@@ -38,6 +41,8 @@ export class AppComponent implements OnInit {
       email: [null],
       password: [null]
     });
+
+    
   }
 
 }
