@@ -14,6 +14,6 @@ export class AppService{
     signUp(data){
         return this.http.post("http://localhost:3000/signup",data)
         .map(res => res.json(),
-             err => err.message);
+             err => err);
     }
 }

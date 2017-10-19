@@ -4,14 +4,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
-/* .main {
+/* 
+.main {
     background-image: url("http://www.devicelab.com.br/img/blink/bg_blink1.jpg");
     backgroundo-size: cover;
     background-repeat: no-repeat;
     background-color:black;
     justify-content: center;
-    background-size: 100%;
+    height: 100%;
 } */
 
 .row{
