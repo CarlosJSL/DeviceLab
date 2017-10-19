@@ -15,9 +15,21 @@ class UsersController {
   }
 
   create(data) {
-    return this.Users.create(data)
-      .then(result => defaultResponse(result, HttpStatus.CREATED))
-      .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+    return this.Users.findOne({where: {email:data.email} })
+        .then(result => {
+            if (result === null){
+               this.Users.create(data)
+                  .then(result => defaultResponse(result, HttpStatus.CREATED))
+                  .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+            }else{
+              return errorResponse("O usuário já está cadastrado no sistema", HttpStatus.NOT_FOUND)
+            }
+        })
+        .catch(error=> errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+  }
+
+  findUser(data){
+    
   }
 
 }
