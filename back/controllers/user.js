@@ -25,7 +25,7 @@ class UsersController {
               return errorResponse("O usuário já está cadastrado no sistema", HttpStatus.NOT_FOUND)
             }
         })
-        .catch(error=> errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+        .catch(error=> errorResponse(error.message, HttpStatus.FORBIDDEN))
   }
 
   findUser(data){
