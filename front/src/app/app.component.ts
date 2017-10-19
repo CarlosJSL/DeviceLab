@@ -23,7 +23,14 @@ export class AppComponent implements OnInit {
   }
 
   onSubmitLogin(){
-    console.log(this.formularioLogin);
+    let data = {
+      ...this.formularioLogin.value
+    }
+
+    this.appService.signIn(data)
+        .subscribe(result => this.toastr.success('Sucesso!'),
+                    err => err)
+
   }
 
   onSubmitCadastro(){

@@ -16,4 +16,10 @@ export class AppService{
         .map(res => res.json(),
              err => err);
     }
+
+    signIn(data){
+        return this.http.post("http://localhost:3000/authenticate",data)
+        .map(res => res.json(),
+             err => err);
+    }
 }
