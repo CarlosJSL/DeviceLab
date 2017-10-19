@@ -1,15 +1,49 @@
-/* .center-align {
+.center-align {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+/* .main {
+    background-image: url("http://www.devicelab.com.br/img/blink/bg_blink1.jpg");
+    backgroundo-size: cover;
+    background-repeat: no-repeat;
+    background-color:black;
+    justify-content: center;
+    background-size: 100%;
 } */
 
+.row{
+    margin-bottom: 0px;
+}
+a{
+    color:red;
+    cursor: pointer;
+}
 .container{
     background:black;
     padding: 70px 40px;
     border-radius: 8px;
     opacity: 0.8;
+    width:auto;
+}
+
+.input-field input[type=text] {
+    color: white;
+    border-bottom: 1px solid rgb(250, 6, 6);
+    font-family: Ubuntu;
+}
+
+.input-field input[type=text]:focus +label {
+    color: rgb(250, 6, 6);
+    border-bottom: rgb(250, 6, 6);
+}
+
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid rgb(250, 2, 2);
+    box-shadow: 0 1px 0 0 rgb(252, 2, 2);
+    color:white
 }
 
 
