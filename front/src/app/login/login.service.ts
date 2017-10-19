@@ -7,7 +7,7 @@ import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 
 @Injectable()
-export class AppService{
+export class LoginService{
 
     constructor(private http: Http) { }
 

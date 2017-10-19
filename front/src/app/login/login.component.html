@@ -1,0 +1,58 @@
+ <div class="container center-align">
+    <div class="row">
+      <form class="col s12 m12 l12 xl12" [hidden] = "signup" [formGroup]="formularioLogin" (ngSubmit) = "onSubmitLogin()">
+        <div class="row">
+            <img src="http://www.devicelab.com.br/img/logo.png" width="160" height="30" alt="DeviceLab">
+          <div class="input-field col s12  m12 l12 xl12">
+            <input id="email" type="email" formControlName = "email" >
+            <label for="email">Email</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12  m12 l12 xl12">
+            <input id="password" type="password" formControlName = "password">
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="row">
+            <button class="btn waves-effect waves-red " type="submit"  name="action">Login
+              </button><br><br>
+              <a  (click) = "signup = true">  Não é cadastrado? <br> 
+                  Cadastre-se ja!
+              </a>
+          </div>
+      </form>
+
+      <form class="col s12 m12 l12 xl12" [hidden] = "!signup" [formGroup]="formularioCadastro" (ngSubmit) = "onSubmitCadastro()">
+        <div class="row" >
+          <img src="http://www.devicelab.com.br/img/logo.png" width="160" height="30" alt="DeviceLab">
+          <div class="input-field col s12  m12 l12 xl12">
+            <input type="text"  formControlName = "name">
+            <label >Nome</label>
+          </div>
+        </div>
+
+        <div class="row">    
+          <div class="input-field col s12  m12 l12 xl12">
+            <input id="email" type="email" formControlName = "email">
+            <label for="email">Email</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12  m12 l12 xl12">
+            <input id="password" type="password" formControlName = "password">
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <div class="row">
+            <button class="btn waves-effect waves-red " type="submit" name="action">Cadastrar
+              </button><br><br>
+              <a (click) = "signup = false">  Já é cadastrado? <br> 
+                  Faça seu login!
+              </a>
+          </div>
+      </form>
+    </div>
+  </div>
