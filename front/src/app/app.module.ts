@@ -10,12 +10,15 @@ import { routing } from './app.routing'
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from "app/app.component";
+import { SessaoExpiradaComponent } from './sessao-expirada/sessao-expirada.component';
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     LoginComponent,
+    SessaoExpiradaComponent,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,13 @@ import { AppComponent } from "app/app.component";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    routing
+    routing,
+    LoadingModule.forRoot({
+      animationType: ANIMATION_TYPES.rectangleBounce,
+      backdropBackgroundColour: 'black', 
+      backdropBorderRadius: '4px',
+      fullScreenBackdrop:true
+  })
     
   ],
   providers: [AuthService,AuthGuardService],

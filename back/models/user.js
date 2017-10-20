@@ -45,9 +45,7 @@ export default (sequelize, DataType) => {
         beforeCreate: user => {
           const salt = bcrypt.genSaltSync();
           user.set('password', bcrypt.hashSync(user.password, salt));
-        },
-        afterCreate: (user) => {
-          user.lastAccess = new Date()
+          user.set('lastAccess', new Date())
         },
       },
       classMethods: {

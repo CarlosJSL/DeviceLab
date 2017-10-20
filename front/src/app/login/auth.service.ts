@@ -22,14 +22,20 @@ export class AuthService{
     signIn(data){
         return this.http.post("http://localhost:3000/authenticate",data)
         .map(res => {
-                     localStorage.setItem('token',res.headers.get("AUTH-TOKEN"))
-
-                     var token = localStorage.getItem('token');
-                     
-                     localStorage.setItem('user',this.jwtHelper.decodeToken(token).name)
-                     localStorage.setItem('email',this.jwtHelper.decodeToken(token).email)
+                     this.setarLocalStorage(res)
                      return res.json()},
              err => err);
+    }
+
+    setarLocalStorage(res){
+        localStorage.setItem('token',res.headers.get("AUTH-TOKEN"))
+        
+        var token = localStorage.getItem('token');
+
+        localStorage.setItem('id', this.jwtHelper.decodeToken(token).id)
+        localStorage.setItem('user', this.jwtHelper.decodeToken(token).name)
+        localStorage.setItem('email', this.jwtHelper.decodeToken(token).email)
+        localStorage.setItem('lastAccess', this.jwtHelper.decodeToken(token).lastAccess)
     }
 
     usuarioEstaAutenticado(){

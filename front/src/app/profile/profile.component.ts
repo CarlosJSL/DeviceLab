@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Component({
   selector: 'app-profile',
@@ -9,15 +10,17 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   jwtHelper: JwtHelper = new JwtHelper();
-  
+  nomeDoUsuario
   constructor(private router: Router) { }
 
   ngOnInit() {
-    if(this.jwtHelper.isTokenExpired(localStorage.getItem('token'))){
+    if(!tokenNotExpired()){
 
       localStorage.clear()
-      this.router.navigate(['/login'])
+      this.router.navigate(['/expirado'])
     }
+    this.nomeDoUsuario = localStorage.getItem('user')
+  
     // console.log(
     //   this.jwtHelper.decodeToken(token),
     //   this.jwtHelper.getTokenExpirationDate(token),

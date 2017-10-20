@@ -25,7 +25,10 @@ export default app => {
           res.json("Usuário não está cadastrado no sistema!")
 
         }else if (user._modelOptions.classMethods.isPassword(user.password, password)) {
-          const payload = { id: user.id, name: user.name, email:user.email };
+          const payload = { id: user.id, 
+                            name: user.name, 
+                            email:user.email,
+                            lastAccess:user.lastAccess  };
           
           res.setHeader("AUTH-TOKEN", jwt.sign(payload, config.jwtSecret, { expiresIn: '1m' }))
           res.json({

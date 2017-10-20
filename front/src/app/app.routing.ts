@@ -1,3 +1,4 @@
+import { SessaoExpiradaComponent } from './sessao-expirada/sessao-expirada.component';
 import { Routes, RouterModule } from '@angular/router'
 import { ProfileComponent } from "app/profile/profile.component";
 import { ModuleWithProviders } from "@angular/core";
@@ -9,7 +10,8 @@ const APP_ROUTES: Routes = [
      canActivate: [AuthGuardService],
      canLoad: [AuthGuardService]},
     {path:'login', component: LoginComponent},
-    {path: '', component: LoginComponent}
+    {path:'expirado', component: SessaoExpiradaComponent},
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
 ]
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);

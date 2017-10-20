@@ -1,6 +1,7 @@
- <div class="container center-align">
-    <div class="row">
-      <form class="col s12 m12 l12 xl12" [hidden] = "signup" [formGroup]="formularioLogin" (ngSubmit) = "onSubmitLogin()">
+ <div class="main ">
+    <ngx-loading [show]="loading" ></ngx-loading>
+    <div class="row center-align">
+      <form class="col s12 m12 l12 xl12 container" [hidden] = "signup" [formGroup]="formularioLogin" (ngSubmit) = "onSubmitLogin()">
         <div class="row">
             <img src="http://www.devicelab.com.br/img/logo.png" width="160" height="30" alt="DeviceLab">
           <div class="input-field col s12  m12 l12 xl12">
@@ -24,7 +25,7 @@
           </div>
       </form>
 
-      <form class="col s12 m12 l12 xl12" [hidden] = "!signup" [formGroup]="formularioCadastro" (ngSubmit) = "onSubmitCadastro()">
+      <form class="col s12 m12 l12 xl12 container" [hidden] = "!signup" [formGroup]="formularioCadastro" (ngSubmit) = "onSubmitCadastro()">
         <div class="row" >
           <img src="http://www.devicelab.com.br/img/logo.png" width="160" height="30" alt="DeviceLab">
           <div class="input-field col s12  m12 l12 xl12">

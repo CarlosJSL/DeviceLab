@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   formularioLogin: FormGroup;
   formularioCadastro : FormGroup;
   authService: AuthService;
+  signup = false;
+  public loading = false;
 
   constructor(private formBuilder: FormBuilder, 
               _authService: AuthService, 
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin(){
+    this.loading = true;
     let data = {
       ...this.formularioLogin.value
     }
@@ -32,20 +35,24 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(data)
         .subscribe(result => { 
                     this.toastr.success('Sucesso!');
-        
+
                     this.router.navigate(['/profile'])
+                    this.loading = false;
                   },
                     err => err)
 
   }
 
   onSubmitCadastro(){
+    this.loading = true;
     let data = {
       ...this.formularioCadastro.value
     }
 
     this.authService.signUp(data)
     .subscribe(result => {  this.toastr.success('Cadastrado!',result); 
+                            this.signup = false
+                            this.loading = false
                            },
                err => this.toastr.error(this.formaString(err)));
   }
@@ -57,6 +64,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.formularioLogin = this.formBuilder.group({
         email: [null],
         password: [null]
@@ -67,6 +75,7 @@ export class LoginComponent implements OnInit {
       email: [null],
       password: [null]
     });
+    
   }
-
+ 
 }
