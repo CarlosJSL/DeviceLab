@@ -1,3 +1,5 @@
+import { AuthService } from './login/auth.service';
+import { AuthGuardService } from './guards/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -7,7 +9,6 @@ import { HttpModule } from '@angular/http';
 import { routing } from './app.routing'
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
-import { LoginService } from "app/login/login.service";
 import { AppComponent } from "app/app.component";
 
 @NgModule({
@@ -24,8 +25,9 @@ import { AppComponent } from "app/app.component";
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     routing
+    
   ],
-  providers: [LoginService],
+  providers: [AuthService,AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

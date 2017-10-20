@@ -1,7 +1,8 @@
+import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { LoginService } from "app/login/login.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +12,16 @@ import { LoginService } from "app/login/login.service";
 export class LoginComponent implements OnInit {
 
   title = 'app works!';
-  signup= false;
   formularioLogin: FormGroup;
   formularioCadastro : FormGroup;
-  loginService: LoginService;
+  authService: AuthService;
   
 
   constructor(private formBuilder: FormBuilder, 
-              _loginService: LoginService, 
-              private toastr: ToastrService) {
-    this.loginService = _loginService;
+              _authService: AuthService, 
+              private toastr: ToastrService,
+              private router: Router) {
+    this.authService = _authService;
   }
 
   onSubmitLogin(){
@@ -28,10 +29,10 @@ export class LoginComponent implements OnInit {
       ...this.formularioLogin.value
     }
 
-    this.loginService.signIn(data)
+    this.authService.signIn(data)
         .subscribe(result => { 
-                    this.toastr.success('Sucesso!')
-                    
+                    this.toastr.success('Sucesso!');
+                    this.router.navigate(['/profile'])
                   },
                     err => err)
 
@@ -42,9 +43,9 @@ export class LoginComponent implements OnInit {
       ...this.formularioCadastro.value
     }
 
-    this.loginService.signUp(data)
+    this.authService.signUp(data)
     .subscribe(result => {  this.toastr.success('Cadastrado!',result); 
-                          this.signup= false },
+                           },
                err => this.toastr.error(this.formaString(err)));
   }
 
