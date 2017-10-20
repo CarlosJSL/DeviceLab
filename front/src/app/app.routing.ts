@@ -2,9 +2,12 @@ import { Routes, RouterModule } from '@angular/router'
 import { ProfileComponent } from "app/profile/profile.component";
 import { ModuleWithProviders } from "@angular/core";
 import { LoginComponent } from "app/login/login.component";
+import { AuthGuardService } from './guards/auth-guard.service';
 
 const APP_ROUTES: Routes = [
-    {path:'profile', component: ProfileComponent},
+    {path:'profile', component: ProfileComponent,
+     canActivate: [AuthGuardService],
+     canLoad: [AuthGuardService]},
     {path:'login', component: LoginComponent},
     {path: '', component: LoginComponent}
 ]

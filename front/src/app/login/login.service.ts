@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class LoginService{
 
+    private usuarioAutenticado: boolean = false;
     constructor(private http: Http) { }
 
     signUp(data){
@@ -19,7 +20,13 @@ export class LoginService{
 
     signIn(data){
         return this.http.post("http://localhost:3000/authenticate",data)
-        .map(res => res.json(),
+        .map(res => {
+                     this.usuarioAutenticado = true ; 
+                     return res.json()},
              err => err);
     }
+
+    usuarioEstaAutenticado(){
+        return this.usuarioAutenticado;
+      }
 }

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   formularioLogin: FormGroup;
   formularioCadastro : FormGroup;
   loginService: LoginService;
+  
 
   constructor(private formBuilder: FormBuilder, 
               _loginService: LoginService, 
@@ -28,7 +29,10 @@ export class LoginComponent implements OnInit {
     }
 
     this.loginService.signIn(data)
-        .subscribe(result => this.toastr.success('Sucesso!'),
+        .subscribe(result => { 
+                    this.toastr.success('Sucesso!')
+                    
+                  },
                     err => err)
 
   }
