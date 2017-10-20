@@ -2,6 +2,7 @@ import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +16,6 @@ export class LoginComponent implements OnInit {
   formularioLogin: FormGroup;
   formularioCadastro : FormGroup;
   authService: AuthService;
-  
 
   constructor(private formBuilder: FormBuilder, 
               _authService: AuthService, 
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(data)
         .subscribe(result => { 
                     this.toastr.success('Sucesso!');
+        
                     this.router.navigate(['/profile'])
                   },
                     err => err)

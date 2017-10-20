@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -7,17 +8,21 @@ import { JwtHelper } from 'angular2-jwt';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
   jwtHelper: JwtHelper = new JwtHelper();
-  constructor() { }
+  
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    var token = localStorage.getItem('token');
-    console.log(
-      this.jwtHelper.decodeToken(token),
-      this.jwtHelper.getTokenExpirationDate(token),
-      this.jwtHelper.isTokenExpired(token)
-    );
+    if(this.jwtHelper.isTokenExpired(localStorage.getItem('token'))){
+
+      localStorage.clear()
+      this.router.navigate(['/login'])
+    }
+    // console.log(
+    //   this.jwtHelper.decodeToken(token),
+    //   this.jwtHelper.getTokenExpirationDate(token),
+    //   this.jwtHelper.isTokenExpired(token)
+    // );
   }
 
 }
