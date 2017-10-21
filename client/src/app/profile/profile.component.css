@@ -1,0 +1,14 @@
+nav{
+    background-color: #323231
+}
+
+.profile{
+    width:100%
+}
+
+.texto-principal{
+    position: relative;
+    z-index: 4;
+    left: 40%;
+    top:40%
+}

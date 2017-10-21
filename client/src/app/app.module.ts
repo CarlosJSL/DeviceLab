@@ -30,8 +30,9 @@ import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading';
     routing,
     LoadingModule.forRoot({
       animationType: ANIMATION_TYPES.rectangleBounce,
-      backdropBackgroundColour: 'black', 
+      backdropBackgroundColour: 'rgb(253, 253, 253)', 
       backdropBorderRadius: '4px',
+      primaryColour: 'red', 
       fullScreenBackdrop:true
   })
     

@@ -27,6 +27,10 @@ export class AuthService{
              err => err);
     }
 
+    logout(){
+
+    }
+    
     setarLocalStorage(res){
         localStorage.setItem('token',res.headers.get("AUTH-TOKEN"))
         

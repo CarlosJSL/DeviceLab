@@ -29,11 +29,17 @@ export default app => {
                             name: user.name, 
                             email:user.email,
                             lastAccess:user.lastAccess  };
+
+          user.lastAccess = new Date();
+          Users.update({lastAccess: user.lastAccess}, { where: { id: user.id } })
+                .then(user => {
           
-          res.setHeader("AUTH-TOKEN", jwt.sign(payload, config.jwtSecret, { expiresIn: '1m' }))
-          res.json({
-            message: "autenticação realizada com sucesso!",
-          });
+                  res.setHeader("AUTH-TOKEN", jwt.sign(payload, config.jwtSecret, { expiresIn: '1m' }))
+                  res.json({
+                    message: "autenticação realizada com sucesso!",
+                  });
+                })
+                .catch(err => err)
         } else {
           res.status(HttpStatus.UNAUTHORIZED);
           res.json("A senha está incorreta!")

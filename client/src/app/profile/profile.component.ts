@@ -1,7 +1,9 @@
+import { AuthService } from './../login/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
 import { tokenNotExpired } from 'angular2-jwt';
+
 
 @Component({
   selector: 'app-profile',
@@ -9,9 +11,14 @@ import { tokenNotExpired } from 'angular2-jwt';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
   jwtHelper: JwtHelper = new JwtHelper();
-  nomeDoUsuario
-  constructor(private router: Router) { }
+  authService: AuthService;
+  nomeDoUsuario:any
+
+  constructor(private router: Router,_authService: AuthService,) {
+    this.authService = _authService;
+   }
 
   ngOnInit() {
     if(!tokenNotExpired()){
@@ -20,12 +27,12 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/expirado'])
     }
     this.nomeDoUsuario = localStorage.getItem('user')
-  
-    // console.log(
-    //   this.jwtHelper.decodeToken(token),
-    //   this.jwtHelper.getTokenExpirationDate(token),
-    //   this.jwtHelper.isTokenExpired(token)
-    // );
+
   }
 
+  logout(){
+    this.authService.logout()
+        .subscribe(res => {},
+                   err => err)
+  }
 }
