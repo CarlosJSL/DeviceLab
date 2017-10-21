@@ -3,12 +3,17 @@ nav{
 }
 
 .profile{
-    width:100%
+    width:100%;
+    position: relative;
+    height: auto;
 }
 
-.texto-principal{
-    position: relative;
-    z-index: 4;
-    left: 40%;
-    top:40%
-}
+h3 { 
+    position: absolute; 
+    top: 30%; 
+    left: 0; 
+    width: 100%; 
+    color: white;
+    font-family: Ubuntu
+ }
+

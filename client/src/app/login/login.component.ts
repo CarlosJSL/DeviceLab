@@ -1,6 +1,6 @@
 import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { JwtHelper } from 'angular2-jwt';
 import { Router } from '@angular/router';
@@ -27,53 +27,66 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmitLogin(){
-    this.loading = true;
-    let data = {
-      ...this.formularioLogin.value
+    console.log()
+    if(this.formularioLogin.valid){
+        this.loading = true
+        let data = {
+          ...this.formularioLogin.value
+        }
+
+        this.authService.signIn(data)
+            .subscribe(result => { 
+                        this.router.navigate(['/profile'])
+                        this.loading = false
+                      },
+                        err => {
+                          
+                          this.loading = false
+                          this.toastr.error(err._body)
+                      })
+    }else{
+      this.loading = false
+      this.toastr.error('O email está em um formato inválido','Inválido')
     }
-
-    this.authService.signIn(data)
-        .subscribe(result => { 
-                    this.router.navigate(['/profile'])
-                    this.loading = false;
-                  },
-                    err => err)
-
   }
 
   onSubmitCadastro(){
     this.loading = true;
-    let data = {
-      ...this.formularioCadastro.value
+
+    if(this.formularioCadastro.valid){
+        let data = {
+          ...this.formularioCadastro.value
+        }
+
+        this.authService.signUp(data)
+            .subscribe(result => {
+                        this.toastr.success('Cadastrado!',result) 
+                        this.signup = false
+                        this.loading = false
+                      },
+                      err => {
+
+                        this.toastr.error(err._body) 
+                      });
+    }else{
+        this.loading = false
+        this.toastr.error('O email está em um formato inválido','Inválido')
     }
 
-    this.authService.signUp(data)
-    .subscribe(result => {  this.toastr.success('Cadastrado!',result); 
-                            this.signup = false
-                            this.loading = false
-                           },
-               err => this.toastr.error(this.formaString(err)));
   }
 
-  formaString(text){
-    return JSON.parse(text._body).error.substring(JSON.parse(text._body)
-                .error.indexOf("Validation Error: ") + 
-                "Validation Error: ".length);
-  }
-
+ 
   ngOnInit() {
 
     this.formularioLogin = this.formBuilder.group({
-        email: [null],
+        email: [null,[<any>Validators.required,<any>Validators.email]],
         password: [null]
     });
 
     this.formularioCadastro = this.formBuilder.group({
       name: [null],
-      email: [null],
+      email: [null,[<any>Validators.required,<any>Validators.email]],
       password: [null]
     });
-    
   }
- 
 }
