@@ -26,7 +26,7 @@ class AuthController {
           
           if (user == null) {
             res.status(HttpStatus.FORBIDDEN)
-            res.json('Usuário não está cadastrado no sistema!')
+            res.json({message:'Usuário não está cadastrado no sistema!'})
           } else if (user._modelOptions.classMethods.isPassword(user.password, password)) {
             const payload = {
               id: user.id,
@@ -54,11 +54,15 @@ class AuthController {
           } else {
             res.status(HttpStatus.UNAUTHORIZED)
             res.json('A senha está incorreta!')
+            throw new Error('A senha ou email estão incorretos!')
           }
         })
         .catch(() => res.sendStatus(HttpStatus.UNAUTHORIZED))
     } else {
-      res.sendStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+      
+      res.json({message:'A senha ou email estão incorretos!!'})
+      res.status(HttpStatus.UNPROCESSABLE_ENTITY)
+      throw new Error('A senha ou email estão incorretos!')
     }
   }
 }
