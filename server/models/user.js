@@ -39,18 +39,24 @@ export default (sequelize, DataType) => {
         type: DataType.DATE,
         allowNull: true,
       },
+      privateKey: {
+        type: DataType.STRING,
+        allowNull: true,
+      },
     },
     {
       hooks: {
-        beforeCreate: user => {
-          const salt = bcrypt.genSaltSync();
-          user.set('password', bcrypt.hashSync(user.password, salt));
+        beforeCreate: (user) => {
+          const salt = bcrypt.genSaltSync()
+          user.set('password', bcrypt.hashSync(user.password, salt))
           user.set('lastAccess', new Date())
+          user.set('privateKey', bcrypt.hashSync(user.email, salt))
         },
       },
       classMethods: {
-        isPassword: (encodedPassword, password) => bcrypt.compareSync(password, encodedPassword)
+        isPassword: (encodedPassword, password) => bcrypt.compareSync(password, encodedPassword),
       },
-    })
+    },
+  )
   return Users
 }

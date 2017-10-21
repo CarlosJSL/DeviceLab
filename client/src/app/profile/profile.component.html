@@ -2,7 +2,7 @@
   <div class="nav-wrapper" >
     <a href="/profile" class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a>Sass</a></li>
+      <li><a (click) = "verificarAutenticacao()"> verificar</a></li>
       <li><a>Bem vindo, {{nomeDoUsuario}}!</a></li>
       <li><a (click) = "logout()">Sign out</a></li>
     </ul>

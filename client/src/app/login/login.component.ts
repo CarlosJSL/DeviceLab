@@ -34,8 +34,6 @@ export class LoginComponent implements OnInit {
 
     this.authService.signIn(data)
         .subscribe(result => { 
-                    this.toastr.success('Sucesso!');
-
                     this.router.navigate(['/profile'])
                     this.loading = false;
                   },

@@ -13,6 +13,6 @@ export default (app) => {
   app.route('/user')
     .all(app.auth.authenticate())
     .get((req, res) => {
-          res.send("ok")
+      res.send('ok')
     })
 }

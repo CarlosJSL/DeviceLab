@@ -10,7 +10,7 @@ import authorization from './auth'
 
 const app = express()
 
-app.use(cors({exposedHeaders:['AUTH-TOKEN']}))
+app.use(cors({ exposedHeaders: ['AUTH-TOKEN'] }))
 app.use(bodyParser.json())
 app.use(morgan('tiny'))
 

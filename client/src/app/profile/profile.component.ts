@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   authService: AuthService;
   nomeDoUsuario:any
 
-  constructor(private router: Router,_authService: AuthService,) {
+  constructor(private router: Router,_authService: AuthService, ) {
     this.authService = _authService;
    }
 
@@ -29,10 +29,20 @@ export class ProfileComponent implements OnInit {
     this.nomeDoUsuario = localStorage.getItem('user')
 
   }
-
+  
+  verificarAutenticacao(){
+    this.authService.isAuthenticate(localStorage.getItem('token'))
+        .subscribe(result => { 
+          console.log(result)
+        },
+          err => err)
+  }
   logout(){
-    this.authService.logout()
-        .subscribe(res => {},
+    this.authService.logout(localStorage.getItem('id'),localStorage.getItem('token'))
+        .subscribe(res => {          
+          localStorage.clear()
+          this.router.navigate(['/login'])
+        },
                    err => err)
   }
 }

@@ -15,19 +15,18 @@ class UsersController {
   }
 
   create(data) {
-
-    return this.Users.findOrCreate({where:{email:data.email}, 
-                                    defaults: {name:data.name,password:data.password}})
-                  .then(result => {
-                      if(result[1]){
-                        return defaultResponse(result, HttpStatus.CREATED)
-                      } else{
-                        return errorResponse("Usuário já está cadastrado!", HttpStatus.FORBIDDEN)
-                      }
-                    })
-                  .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
+    return this.Users.findOrCreate({
+      where: { email: data.email },
+      defaults: { name: data.name, password: data.password },
+    })
+      .then((result) => {
+        if (result[1]) {
+          return defaultResponse(result, HttpStatus.CREATED)
+        }
+        return errorResponse('Usuário já está cadastrado!', HttpStatus.FORBIDDEN)
+      })
+      .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
   }
-
 }
 
 export default UsersController
