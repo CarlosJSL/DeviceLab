@@ -9,5 +9,12 @@
     },
     "rules": {
       "semi": ["error", "never"]
+    },
+    "globals": {
+      "describe": true,
+      "it": true,
+      "app": true,
+      "beforeEach": true,
+      "request": true
     }
   }

@@ -2,7 +2,7 @@ import UsersController from '../controllers/user'
 
 export default (app) => {
   const usersController = new UsersController(app.datasource.models.Users)
-  app.route('/signup')
+  app.route('/api/signup')
     .post((req, res) => {
       usersController.create(req.body)
         .then((response) => {

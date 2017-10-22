@@ -9,12 +9,12 @@ class AuthController {
   async authenticate(req, res) {
 
     const userAuthenticate = await this.userAlreadyExists(req,res);
-
+    
     this.user.update({ lastAccess: userAuthenticate.lastAccess, 
                        privateKey :userAuthenticate.privateKey}, 
                      { where: { id: userAuthenticate.id } })
               .then((userUpdated) => {
-
+                
                     res.setHeader('AUTH-TOKEN', jwt.sign(userAuthenticate.payload,  
                                   userAuthenticate.privateKey, { expiresIn: '5m' }))
                     res.json({message: 'autenticação realizada com sucesso!'})
@@ -31,7 +31,7 @@ class AuthController {
         .then((user) => {
           
           if (user == null) {
-            res.status(HttpStatus.FORBIDDEN)
+            res.status(HttpStatus.BAD_REQUEST)
             res.json({message:'Usuário não está cadastrado no sistema!'})
           } else if (user._modelOptions.classMethods.isPassword(user.password, password)) {
             const payload = {

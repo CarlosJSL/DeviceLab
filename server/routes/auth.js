@@ -6,17 +6,17 @@ export default (app) => {
   const Users = app.datasource.models.Users
   const authController = new AuthController(app.datasource.models.Users)   
 
-  app.route('/isauthenticate',)
+  app.route('/api/isauthenticate',)
     .all(app.auth.authenticate())
     .get((req, res) => {
-      res.send("Usuário está autorizado!")
+      res.json({message:"Usuário está autorizado!"})
       
     })
     
-  app.route('/signout/:id',)
+  app.route('/api/logout',)
     .all(app.auth.authenticate())
-    .get((req, res) => {
-       Users.update({privateKey:''}, { where: { id: req.params.id } })
+    .post((req, res) => {
+       Users.update({privateKey:''}, { where: { id: req.body.id } })
             .then(user => {
                 res.json({
                   message: 'logout feito com sucesso!',
@@ -25,7 +25,7 @@ export default (app) => {
             .catch( err => err)
     })
 
-  app.post('/authenticate', (req, res) => {
+  app.post('/api/authenticate', (req, res) => {
         authController.authenticate(req, res)
 
   })
