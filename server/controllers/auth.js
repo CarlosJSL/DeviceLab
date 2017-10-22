@@ -1,24 +1,14 @@
 import HttpStatus from 'http-status'
 import jwt from 'jsonwebtoken'
 
-
-const defaultResponse = (data, statusCode = HttpStatus.OK) => ({
-  data,
-  statusCode,
-})
-
-const errorResponse = (message, statusCode = HttpStatus.BAD_REQUEST) => defaultResponse({
-  error: message,
-}, statusCode)
-
 class AuthController {
   constructor(User) {
     this.user = User
   }
 
-  async authenticate(req, res, Users) {
+  async authenticate(req, res) {
 
-    const userAuthenticate = await this.userAlreadyExists(req);
+    const userAuthenticate = await this.userAlreadyExists(req,res);
 
     this.user.update({ lastAccess: userAuthenticate.lastAccess, 
                        privateKey :userAuthenticate.privateKey}, 
@@ -32,7 +22,7 @@ class AuthController {
               .catch(err => err)
   }
 
-  async userAlreadyExists(req){
+  async userAlreadyExists(req,res){
     if (req.body.email && req.body.password) {
       const email = req.body.email
       const password = req.body.password

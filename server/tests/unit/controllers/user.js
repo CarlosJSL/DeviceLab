@@ -10,16 +10,18 @@ describe('Controllers: Users', () => {
         User.findOrCreate = sinon.stub();
         
         const requestBody =  {
-            "name":"sarah",
-            "email": "sarah@hotmail.com",
+            "name":"carlos",
+            "email": "carlos@hotmail.com",
             "password": "213"
         }
     
           const expectedResponse = [{
             id: 1,
-            name: 'Test User',
-            created_at: '2016-08-06T23:55:36.692Z',
-            updated_at: '2016-08-06T23:55:36.692Z',
+            name: 'carlos',
+            email: 'carlos@hotmail.com',
+            created_at: '2017-08-06T23:55:36.692Z',
+            updated_at: '2017-08-06T23:55:36.692Z',
+            lastAccess: '2017-08-06T23:55:36.692Z'
           },true];
           
           class fakeUser {
@@ -41,9 +43,11 @@ describe('Controllers: Users', () => {
          
           return usersController.create(requestBody)
           .then(response => {
-              console.log(response)
+              
             sinon.assert.match(response.statusCode, 201);
-            
+            sinon.assert.match(response.data[0].name, 'carlos');
+            sinon.assert.match(response.data[0].email, 'carlos@hotmail.com');
+            sinon.assert.match(response.data[0].lastAccess, '2017-08-06T23:55:36.692Z');
         })
       })
     })
