@@ -20,10 +20,14 @@ class UsersController {
       defaults: { name: data.name, password: data.password },
     })
       .then((result) => {
+        
         if (result[1]) {
+          
           return defaultResponse(result, HttpStatus.CREATED)
+        }else{
+         
+        return errorResponse('Usuário já está cadastrado!', HttpStatus.BAD_REQUEST)
         }
-        return errorResponse('Usuário já está cadastrado!', HttpStatus.FORBIDDEN)
       })
       .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY))
   }

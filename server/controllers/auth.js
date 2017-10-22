@@ -16,12 +16,28 @@ class AuthController {
     this.user = User
   }
 
-  authenticate(req, res, Users) {
+  async authenticate(req, res, Users) {
+
+    const userAuthenticate = await this.userAlreadyExists(req);
+
+    this.user.update({ lastAccess: userAuthenticate.lastAccess, 
+                       privateKey :userAuthenticate.privateKey}, 
+                     { where: { id: userAuthenticate.id } })
+              .then((userUpdated) => {
+
+                    res.setHeader('AUTH-TOKEN', jwt.sign(userAuthenticate.payload,  
+                                  userAuthenticate.privateKey, { expiresIn: '5m' }))
+                    res.json({message: 'autenticação realizada com sucesso!'})
+              })
+              .catch(err => err)
+  }
+
+  async userAlreadyExists(req){
     if (req.body.email && req.body.password) {
       const email = req.body.email
       const password = req.body.password
 
-      this.user.findOne({ where: { email } })
+     return this.user.findOne({ where: { email } })
         .then((user) => {
           
           if (user == null) {
@@ -37,20 +53,9 @@ class AuthController {
             }
 
             user.lastAccess = new Date()
-            user.privateKey = Math.random().toString(36).substring(7)
-
-            this.user.update({ lastAccess: user.lastAccess, 
-                           privateKey :user.privateKey}, 
-                           { where: { id: user.id } })
-
-              .then((userUpdated) => {
-                
-                res.setHeader('AUTH-TOKEN', jwt.sign(payload,  user.privateKey, { expiresIn: '5m' }))
-                res.json({
-                  message: 'autenticação realizada com sucesso!',
-                })
-              })
-              .catch(err => err)
+            user.privateKey = Math.random().toString(36)
+            return {lastAccess:user.lastAccess,privateKey:user.privateKey,id:user.id, payload:payload }  
+            
           } else {
             res.status(HttpStatus.UNAUTHORIZED)
             res.json('A senha está incorreta!')
