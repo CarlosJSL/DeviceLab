@@ -1,33 +1,33 @@
-import { AuthService } from './auth.service';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { JwtHelper } from 'angular2-jwt';
-import { Router } from '@angular/router';
+import { AuthService } from './auth.service'
+import { Component, OnInit } from '@angular/core'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { ToastrService } from 'ngx-toastr'
+import { JwtHelper } from 'angular2-jwt'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
 
-  title = 'app works!';
-  formularioLogin: FormGroup;
-  formularioCadastro : FormGroup;
-  authService: AuthService;
-  signup = false;
-  public loading = false;
+  title = 'app works!'
+  formularioLogin: FormGroup
+  formularioCadastro : FormGroup
+  authService: AuthService
+  signup = false
+  public loading = false
 
   constructor(private formBuilder: FormBuilder, 
               _authService: AuthService, 
               private toastr: ToastrService,
               private router: Router) {
-    this.authService = _authService;
+    this.authService = _authService
   }
 
   onSubmitLogin(){
-    console.log()
+    
     if(this.formularioLogin.valid){
         this.loading = true
         let data = {
@@ -42,16 +42,16 @@ export class LoginComponent implements OnInit {
                         err => {
                           
                           this.loading = false
-                          this.toastr.error(err._body)
+                          this.toastr.error("Usuário não cadastrado") 
                       })
     }else{
       this.loading = false
-      this.toastr.error('O email está em um formato inválido','Inválido')
-    }
+      this.toastr.error('Formato de email inválido!')
+    }    
   }
 
   onSubmitCadastro(){
-    this.loading = true;
+    this.loading = true
 
     if(this.formularioCadastro.valid){
         let data = {
@@ -60,17 +60,17 @@ export class LoginComponent implements OnInit {
 
         this.authService.signUp(data)
             .subscribe(result => {
-                        this.toastr.success('Cadastrado!',result) 
+                        this.toastr.success('Cadastrado!') 
                         this.signup = false
                         this.loading = false
                       },
                       err => {
-
-                        this.toastr.error(err._body) 
-                      });
+                        this.loading = false
+                        this.toastr.error("Não foi possível cadastrar o usuário") 
+                      })
     }else{
         this.loading = false
-        this.toastr.error('O email está em um formato inválido','Inválido')
+        this.toastr.error('Formato de email inválido!')
     }
 
   }
@@ -81,12 +81,12 @@ export class LoginComponent implements OnInit {
     this.formularioLogin = this.formBuilder.group({
         email: [null,[<any>Validators.required,<any>Validators.email]],
         password: [null]
-    });
+    })
 
     this.formularioCadastro = this.formBuilder.group({
       name: [null],
       email: [null,[<any>Validators.required,<any>Validators.email]],
       password: [null]
-    });
+    })
   }
 }

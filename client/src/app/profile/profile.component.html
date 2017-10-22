@@ -1,18 +1,39 @@
-<nav>
-  <div class="nav-wrapper" >
-    <a href="/profile" class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a>Bem vindo, {{nomeDoUsuario}}!</a></li>
-      <li><a (click) = "logout()">Sign out</a></li>
-    </ul>
-  </div>
-</nav>
 
-<div class = "col s12 m12" >
-    <img src="http://klick-ass.com/go/wp-content/uploads/2013/11/Edge-Inspect-MacBook2.jpg" width="100%" height="auto">
+<div class = "main" >
+  <nav>
+    <div class="nav-wrapper" >
+      <a href="/profile" class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a>Ultimo acesso: {{ultimoAcesso | amDateFormat:'LL'}}</a></li>
+        <li><a>Bem vindo, {{nomeDoUsuario}}!</a></li>
+        <li><a (click) = "logout()">Sign out</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="center-align">
+    <h3> Essa é sua tela de perfil <br> Seja bem vindo!</h3>
+    <ngx-loading [show]="loading" ></ngx-loading>
+  </div>   
    
 </div>
+<div class = "main" >
+  <nav>
+    <div class="nav-wrapper" >
+      <a href="/profile" class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a>Ultimo acesso: {{ultimoAcesso | amDateFormat:'LL'}}</a></li>
+        <li><a>Bem vindo, {{nomeDoUsuario}}!</a></li>
+        <li><a (click) = "logout()">Sign out</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<div class = "col s12 m12" >
-  <h3 style="text-align:center">Essa é sua tela de perfil ! </h3>
+  <div class="center-align">
+    <div class="row">
+      <h3> Essa é sua tela de perfil <br> Seja bem vindo!</h3>
+      <ngx-loading [show]="loading" ></ngx-loading>
+    </div>
+  </div>   
+   
 </div>
