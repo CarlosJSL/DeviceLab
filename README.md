@@ -47,7 +47,7 @@ Uma API REST para realizar autenticação via token integrada com uma aplicaçã
 - eslint
 
 ## Refrência da api
-Entre na pasta /documentation e acesse o arquivo index.html para mais informações
+Entre na pasta server/documentation e acesse o arquivo index.html para mais informações
 
 ### User
 |      METODO      |     ENDPOINT              |        FUNÇÃO                                    
