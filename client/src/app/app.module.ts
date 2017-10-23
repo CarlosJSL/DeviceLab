@@ -13,6 +13,7 @@ import { AppComponent } from "app/app.component"
 import { SessaoExpiradaComponent } from './sessao-expirada/sessao-expirada.component'
 import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading'
 import { MomentModule } from 'angular2-moment'
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -34,9 +35,10 @@ import { MomentModule } from 'angular2-moment'
       backdropBackgroundColour: 'rgb(253, 253, 253)', 
       backdropBorderRadius: '4px',
       primaryColour: 'red', 
-      fullScreenBackdrop:true
     }),
-    MomentModule
+    MomentModule,
+    ChartsModule
+   
   ],
   providers: [AuthService,AuthGuardService],
   bootstrap: [AppComponent]

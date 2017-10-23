@@ -1,39 +1,83 @@
-
-<div class = "main" >
-  <nav>
+<nav>
     <div class="nav-wrapper" >
-      <a href="/profile" class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
+      <a href="#" class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a>Ultimo acesso: {{ultimoAcesso | amDateFormat:'LL'}}</a></li>
+        <li><a data-activates="slide-out" id = "menu">Menu</a></li>
         <li><a>Bem vindo, {{nomeDoUsuario}}!</a></li>
         <li><a (click) = "logout()">Sign out</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="center-align">
-    <h3> Essa é sua tela de perfil <br> Seja bem vindo!</h3>
-    <ngx-loading [show]="loading" ></ngx-loading>
-  </div>   
-   
-</div>
-<div class = "main" >
-  <nav>
-    <div class="nav-wrapper" >
-      <a href="/profile" class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a>Ultimo acesso: {{ultimoAcesso | amDateFormat:'LL'}}</a></li>
-        <li><a>Bem vindo, {{nomeDoUsuario}}!</a></li>
-        <li><a (click) = "logout()">Sign out</a></li>
-      </ul>
+<div class="row s12 m12 principal" >
+  <h3>Meus Projetos</h3>
+  <div class="row s12 m12 " style="margin-top:50px">
+    <hr>
+    <div class="col s12 m12 l3 xl3" *ngFor="let card of cards">
+      <div class="card small" >
+        <div class="card-image ">
+          <img src="{{card.img}}" >
+          
+        </div>
+        <div class="card-content">
+          <p>{{card.descricao}}</p>
+        </div>
+      </div>
     </div>
-  </nav>
+  </div>
+</div>
+<div class="row s12 m12" id = "relatorios" >
+    <h3 style="color:black">Relatórios de Produtividade</h3>
+    <div class="row s12 m12 ">
+      <hr>
+      <div class="col s12 m12 l6 xl6">
+          <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+      </div>
+      <div class="col s12 m12 l6 xl6">
+          <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [legend]="barChartLegend"
+          [chartType]="barChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+      </div>
 
-  <div class="center-align">
-    <div class="row">
-      <h3> Essa é sua tela de perfil <br> Seja bem vindo!</h3>
-      <ngx-loading [show]="loading" ></ngx-loading>
     </div>
-  </div>   
-   
-</div>
+  </div>
+<ul id="slide-out" class="side-nav">
+    <li>
+      <div class="user-view" id = "menu-profile" >
+      <div class="background">
+        <img src="http://www.iccastelfrentano.gov.it/castelfrentano/images/IMG_0094.PNG">
+      </div>
+      <a ><img class="circle" src="http://www.androidfreeware.net/software_images/johann-sebastian-bach-music.thumb.png"></a>
+      <a ><span class="black-text name">{{nomeDoUsuario}}</span></a>
+      <a ><span class="black-text email">lastAccess: {{ultimoAcesso | amDateFormat:'LL'}}</span></a>
+      
+    </div>
+</ul>
+<footer class="page-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Device Lab</h5>
+            <p class="grey-text text-lighten-4">Rua Gomes de Carvalho, 621 - conj. 505-506 - Vila Olímpia - São Paulo - SP
+                Cep:04547-002</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2017 Copyright Text
+        </div>
+      </div>
+</footer>

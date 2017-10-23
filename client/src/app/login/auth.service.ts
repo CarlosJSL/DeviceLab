@@ -35,7 +35,7 @@ export class AuthService{
 
         let options = new RequestOptions({ headers: headers })
 
-        return this.http.post("http://localhost:3000/api/signout",id,options)
+        return this.http.post("http://localhost:3000/api/logout",id,options)
         .map(res =>  res.json(),
              err => err)
     }
