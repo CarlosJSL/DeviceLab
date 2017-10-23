@@ -12,6 +12,7 @@ const APP_ROUTES: Routes = [
     {path:'login', component: LoginComponent},
     {path:'expirado', component: SessaoExpiradaComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ]
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES)
+export const routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES,{useHash:true})

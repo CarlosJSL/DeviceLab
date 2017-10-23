@@ -1,11 +1,17 @@
 <nav>
     <div class="nav-wrapper" >
-      <a href="#" class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
+        <a  data-activates="mobile-demo" class="button-collapse" id = "menu-mobile"><i class="material-icons">menu</i></a>
+      <a  class="brand-logo"><img src="http://www.devicelab.com.br/img/logo.png" alt="Smiley face" style="margin-left: 10px" height="30" width="160"></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a data-activates="slide-out" id = "menu">Menu</a></li>
         <li><a>Bem vindo, {{nomeDoUsuario}}!</a></li>
         <li><a (click) = "logout()">Sign out</a></li>
       </ul>
+      <ul class="side-nav" id="mobile-demo">
+          <li><a data-activates="slide-out" id = "menu">Menu</a></li>
+          <li><a>Bem vindo, {{nomeDoUsuario}}!</a></li>
+          <li><a (click) = "logout()">Sign out</a></li>
+        </ul>
     </div>
   </nav>
 
