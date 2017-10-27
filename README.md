@@ -92,7 +92,7 @@ Depois fazer o download do NodeJs
 
 Clonar o projeto
 ```sh
-> git clone https://gitlab.com/carlosjsl95/survivorProject.git
+> git clone https://github.com/CarlosJSL/DeviceLab.git
 ```
 
 Instalar as dependências do projeto(tanto da pasta client quanto da pastar server)
